@@ -1,10 +1,8 @@
-import UserController from '@/controllers/UserController'
+
 describe('Users', () => {
   it('Should import UserController', () => {
-    const user = new UserController()
+    const name = 'www'
 
-    user.name = 'Guto'
-
-    expect(user.name).toBe('Guto')
+    expect(name).toBe('www')
   })
 })

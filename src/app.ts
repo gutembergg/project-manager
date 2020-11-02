@@ -1,5 +1,7 @@
 import 'reflect-metadata'
+import 'express-async-errors'
 import express from 'express'
+import routes from './routes'
 
 class App {
     public express: express.Application
@@ -8,6 +10,7 @@ class App {
       this.express = express()
 
       this.middlewares()
+      this.routes()
     }
 
     private middlewares () {
@@ -15,7 +18,7 @@ class App {
     }
 
     private routes () {
-
+      this.express.use(routes)
     }
 }
 
