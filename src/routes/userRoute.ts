@@ -6,5 +6,6 @@ const userRoute = Router()
 const userController = new UserController()
 
 userRoute.post('/', userController.create)
+userRoute.patch('/:id', userController.enable)
 
 export default userRoute

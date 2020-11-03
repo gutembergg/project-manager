@@ -1,15 +1,13 @@
 import { Router } from 'express'
 import userRoute from './userRoute'
 import sessionRoute from './sessionRoute'
+import clientRoute from './clientRoute'
 
 const routes = Router()
 const prefixRoutes = '/api/v1'
 
-routes.get('/', (req, res) => {
-  return res.send('Hello world')
-})
-
 routes.use(`${prefixRoutes}/user`, userRoute)
 routes.use(`${prefixRoutes}/session`, sessionRoute)
+routes.use(`${prefixRoutes}/client`, clientRoute)
 
 export default routes
