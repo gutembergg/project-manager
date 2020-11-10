@@ -6,5 +6,7 @@ const clientRoute = Router()
 const clientControlle = new ClientController()
 
 clientRoute.get('/', clientControlle.index)
+clientRoute.post('/', clientControlle.create)
+clientRoute.put('/:id', clientControlle.update)
 
 export default clientRoute

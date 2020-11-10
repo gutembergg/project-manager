@@ -40,7 +40,7 @@ class SessionService {
         throw new AppErros('User not active', 401)
       }
 
-      const token = sign({}, process.env.APP_SECRET as string, {
+      const token = sign({ id: user.id }, process.env.APP_SECRET as string, {
         expiresIn: '1d'
       })
 

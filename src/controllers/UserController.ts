@@ -4,6 +4,15 @@ import { Request, Response } from 'express'
 import EnableUserService from '@/services/EnableUserService'
 
 class UserController {
+  public async index (req: Request, res: Response): Promise<Response> {
+    const userRepository = new UserRepository()
+
+    const { id } = req.params
+    const user = await userRepository.findById(id)
+
+    return res.status(200).json(user)
+  }
+
   public async create (req: Request, res: Response): Promise<Response> {
     const { name, email, password } = req.body
 

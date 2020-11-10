@@ -1,5 +1,6 @@
 import IClientRepository from '@/repositories/IClientRepository'
 import Client from '@/models/Client'
+import AppErros from '@/errors/AppErros'
 
 interface IRequest {
     name: string,
@@ -15,6 +16,12 @@ class CreateClientService {
     }
 
     public async execute ({ name, email, telephone }: IRequest): Promise<Client> {
+      const clientEmail = await this.clientRepository.findByEmail(email)
+
+      if (clientEmail) {
+        throw new AppErros('Email alwais used', 401)
+      }
+
       const client = this.clientRepository.create({
         name,
         email,
