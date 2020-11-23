@@ -3,29 +3,29 @@ import User from '@/models/User'
 import AppErros from '@/errors/AppErros'
 
 interface IRequest {
-    id: string
+  id: string
 }
 
 class EnableUserService {
-    private userRepository: IUserRepositoty
+  private userRepository: IUserRepositoty
 
-    constructor (userRepository: IUserRepositoty) {
-      this.userRepository = userRepository
+  constructor(userRepository: IUserRepositoty) {
+    this.userRepository = userRepository
+  }
+
+  public async execute({ id }: IRequest): Promise<User> {
+    const user = await this.userRepository.findById(id)
+
+    if (!user) {
+      throw new AppErros('User not found', 400)
     }
 
-    public async execute ({ id }: IRequest): Promise<User> {
-      const user = await this.userRepository.findById(id)
+    user.active = !user.active
 
-      if (!user) {
-        throw new AppErros('User not found', 400)
-      }
+    await this.userRepository.save(user)
 
-      user.active = !user.active
-
-      await this.userRepository.save(user)
-
-      return user
-    }
+    return user
+  }
 }
 
 export default EnableUserService
